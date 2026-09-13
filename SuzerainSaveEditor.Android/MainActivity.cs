@@ -24,6 +24,7 @@ public class MainActivity : AvaloniaMainActivity<App>, IPlatformHost
     protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
     {
         App.Host = this;
+        BackRequested += OnBackRequested;
         return base.CustomizeAppBuilder(builder).WithInterFont();
     }
 
@@ -36,15 +37,16 @@ public class MainActivity : AvaloniaMainActivity<App>, IPlatformHost
         return new PlatformComposition(_mainView, _dialogService, fileDialogService);
     }
 
-    public override void OnBackPressed()
+    // BackRequested is Avalonia's own wrapper over the modern OnBackPressedDispatcher/
+    // OnBackInvoked APIs (Android 13+ predictive-back-safe) - this replaces overriding
+    // the deprecated Activity.OnBackPressed() directly.
+    private void OnBackRequested(object? sender, AndroidBackRequestedEventArgs e)
     {
         if (_mainView?.DataContext is MainWindowViewModel vm && _dialogService is not null)
         {
+            e.Handled = true; // suppress the default back action until we've resolved
             _ = HandleBackPressAsync(vm);
-            return; // swallow the default back-press until we've resolved
         }
-
-        base.OnBackPressed();
     }
 
     private async Task HandleBackPressAsync(MainWindowViewModel vm)
