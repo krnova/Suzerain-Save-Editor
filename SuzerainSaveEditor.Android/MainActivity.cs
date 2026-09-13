@@ -12,7 +12,7 @@ using SuzerainSaveEditor.UI.Views;
 namespace SuzerainSaveEditor.Android;
 
 [Activity(
-    Label = "Suzerain Save Editor",
+    Label = "Suzedit",
     Theme = "@style/MyTheme",
     MainLauncher = true,
     ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.KeyboardHidden)]

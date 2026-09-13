@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.suzerain.saveeditor">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="krnova.suzedit">
     <uses-sdk android:minSdkVersion="29" android:targetSdkVersion="36" />
-    <application android:label="Suzerain Save Editor" android:allowBackup="true"></application>
+    <application android:label="Suzedit" android:allowBackup="true"></application>
 
     <!--
       Intentionally no storage permissions here. File access goes through

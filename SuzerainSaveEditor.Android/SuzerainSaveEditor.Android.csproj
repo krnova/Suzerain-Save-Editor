@@ -8,7 +8,7 @@
     <SupportedOSPlatformVersion>29</SupportedOSPlatformVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <ApplicationId>com.suzerain.saveeditor</ApplicationId>
+    <ApplicationId>krnova.suzedit</ApplicationId>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
     <ApplicationVersion>1</ApplicationVersion>
     <AndroidManifest>AndroidManifest.xml</AndroidManifest>
