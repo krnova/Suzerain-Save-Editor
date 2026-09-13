@@ -2,4 +2,6 @@
   <Project Path="SuzerainSaveEditor.App/SuzerainSaveEditor.App.csproj" />
   <Project Path="SuzerainSaveEditor.Core/SuzerainSaveEditor.Core.csproj" />
   <Project Path="SuzerainSaveEditor.Tests/SuzerainSaveEditor.Tests.csproj" />
+  <Project Path="SuzerainSaveEditor.UI/SuzerainSaveEditor.UI.csproj" />
+  <Project Path="SuzerainSaveEditor.Android/SuzerainSaveEditor.Android.csproj" />
 </Solution>

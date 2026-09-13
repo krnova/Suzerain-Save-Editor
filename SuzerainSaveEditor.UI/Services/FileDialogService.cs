@@ -1,24 +1,27 @@
-using Avalonia.Controls;
+using Avalonia;
 using Avalonia.Platform.Storage;
 using SuzerainSaveEditor.Core.Services;
 
-namespace SuzerainSaveEditor.App.Services;
+namespace SuzerainSaveEditor.UI.Services;
 
 public sealed class FileDialogService : IFileDialogService
 {
-    private readonly Window _window;
+    private readonly Visual _anchor;
     private readonly ISavePathProvider _savePathProvider;
 
-    public FileDialogService(Window window, ISavePathProvider savePathProvider)
+    public FileDialogService(Visual anchor, ISavePathProvider savePathProvider)
     {
-        ArgumentNullException.ThrowIfNull(window);
+        ArgumentNullException.ThrowIfNull(anchor);
         ArgumentNullException.ThrowIfNull(savePathProvider);
-        _window = window;
+        _anchor = anchor;
         _savePathProvider = savePathProvider;
     }
 
     public async Task<string?> OpenFileAsync()
     {
+        var topLevel = TopLevel.GetTopLevel(_anchor)
+            ?? throw new InvalidOperationException("No TopLevel available for the file picker yet.");
+
         IStorageFolder? suggestedFolder = null;
 
         // try each candidate save directory in priority order
@@ -28,7 +31,7 @@ public sealed class FileDialogService : IFileDialogService
             {
                 try
                 {
-                    suggestedFolder = await _window.StorageProvider
+                    suggestedFolder = await topLevel.StorageProvider
                         .TryGetFolderFromPathAsync(candidatePath);
                     if (suggestedFolder is not null)
                         break;
@@ -40,7 +43,7 @@ public sealed class FileDialogService : IFileDialogService
             }
         }
 
-        var files = await _window.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+        var files = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
         {
             Title = "Open Suzerain Save File",
             SuggestedStartLocation = suggestedFolder,

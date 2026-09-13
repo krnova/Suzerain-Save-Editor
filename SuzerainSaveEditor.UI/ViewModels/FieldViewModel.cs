@@ -1,7 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using SuzerainSaveEditor.Core.Schema;
 
-namespace SuzerainSaveEditor.App.ViewModels;
+namespace SuzerainSaveEditor.UI.ViewModels;
 
 // represents a single editable field in the UI with type-specific bindings
 public sealed partial class FieldViewModel : ViewModelBase

@@ -1,9 +1,8 @@
-using System.IO;
-using System.Security;
 using Avalonia.Controls;
 using Avalonia.Input;
-using SuzerainSaveEditor.App.Services;
-using SuzerainSaveEditor.App.ViewModels;
+using SuzerainSaveEditor.UI;
+using SuzerainSaveEditor.UI.Services;
+using SuzerainSaveEditor.UI.ViewModels;
 
 namespace SuzerainSaveEditor.App.Views;
 
@@ -11,6 +10,8 @@ public partial class MainWindow : Window
 {
     private bool _forceClose;
     private bool _isClosing;
+
+    public IDialogService? DialogService { get; set; }
 
     public MainWindow()
     {
@@ -52,36 +53,10 @@ public partial class MainWindow : Window
         if (path is null) return;
 
         if (DataContext is not MainWindowViewModel vm) return;
+        if (DialogService is null) return;
 
-        if (vm.IsDirty && !vm.SaveCommittedToDisk)
-        {
-            var dialog = new UnsavedChangesDialog();
-            await dialog.ShowDialog(this);
-
-            switch (dialog.Result)
-            {
-                case UnsavedChangesResult.Save:
-                    try
-                    {
-                        await vm.SaveCommand.ExecuteAsync(null);
-                    }
-                    catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or SecurityException)
-                    {
-                        // save failed — don't load the dropped file
-                        return;
-                    }
-
-                    if (vm.IsDirty && !vm.SaveCommittedToDisk)
-                        return; // save didn't clear dirty state
-                    break;
-
-                case UnsavedChangesResult.Discard:
-                    break;
-
-                case UnsavedChangesResult.Cancel:
-                    return;
-            }
-        }
+        if (!await UnsavedChangesFlow.ResolveAsync(vm, DialogService))
+            return;
 
         await vm.LoadFileAsync(path);
     }
@@ -97,6 +72,7 @@ public partial class MainWindow : Window
         if (_forceClose) return;
 
         if (DataContext is not MainWindowViewModel vm) return;
+        if (DialogService is null) return;
         if (!vm.IsDirty || vm.SaveCommittedToDisk) return;
 
         e.Cancel = true;
@@ -107,36 +83,10 @@ public partial class MainWindow : Window
 
         try
         {
-            var dialog = new UnsavedChangesDialog();
-            await dialog.ShowDialog(this);
-
-            switch (dialog.Result)
+            if (await UnsavedChangesFlow.ResolveAsync(vm, DialogService))
             {
-                case UnsavedChangesResult.Save:
-                    try
-                    {
-                        await vm.SaveCommand.ExecuteAsync(null);
-                    }
-                    catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or SecurityException)
-                    {
-                        // save failed — keep window open so user can retry or discard
-                        break;
-                    }
-
-                    if (!vm.IsDirty || vm.SaveCommittedToDisk)
-                    {
-                        _forceClose = true;
-                        Close();
-                    }
-                    break;
-
-                case UnsavedChangesResult.Discard:
-                    _forceClose = true;
-                    Close();
-                    break;
-
-                case UnsavedChangesResult.Cancel:
-                    break;
+                _forceClose = true;
+                Close();
             }
         }
         finally

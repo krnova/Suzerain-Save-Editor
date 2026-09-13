@@ -1,14 +1,8 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using SuzerainSaveEditor.UI;
 
 namespace SuzerainSaveEditor.App.Views;
-
-public enum UnsavedChangesResult
-{
-    Cancel,
-    Discard,
-    Save
-}
 
 public partial class UnsavedChangesDialog : Window
 {

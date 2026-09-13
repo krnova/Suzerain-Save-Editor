@@ -1,10 +1,10 @@
 using Avalonia.Platform.Storage;
 
-namespace SuzerainSaveEditor.App.Services;
+namespace SuzerainSaveEditor.UI.Services;
 
-internal static class DragDropHelper
+public static class DragDropHelper
 {
-    internal static IReadOnlyList<DroppedFile>? ToDroppedFiles(IReadOnlyList<IStorageItem>? items)
+    public static IReadOnlyList<DroppedFile>? ToDroppedFiles(IReadOnlyList<IStorageItem>? items)
     {
         if (items is null) return null;
 
@@ -15,7 +15,7 @@ internal static class DragDropHelper
         return result;
     }
 
-    internal static bool HasJsonFile(IReadOnlyList<DroppedFile>? files)
+    public static bool HasJsonFile(IReadOnlyList<DroppedFile>? files)
     {
         if (files is null) return false;
 
@@ -28,7 +28,7 @@ internal static class DragDropHelper
         return false;
     }
 
-    internal static string? GetFirstJsonFilePath(IReadOnlyList<DroppedFile>? files)
+    public static string? GetFirstJsonFilePath(IReadOnlyList<DroppedFile>? files)
     {
         if (files is null) return null;
 

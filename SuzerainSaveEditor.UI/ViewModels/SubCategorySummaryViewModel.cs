@@ -1,6 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace SuzerainSaveEditor.App.ViewModels;
+namespace SuzerainSaveEditor.UI.ViewModels;
 
 // represents a clickable card summarizing a sub-category in the parent dashboard
 public sealed partial class SubCategorySummaryViewModel : ViewModelBase

@@ -1,10 +1,10 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SuzerainSaveEditor.App.Services;
+using SuzerainSaveEditor.UI.Services;
 using SuzerainSaveEditor.Core.Schema;
 using SuzerainSaveEditor.Core.Services;
 
-namespace SuzerainSaveEditor.App.ViewModels;
+namespace SuzerainSaveEditor.UI.ViewModels;
 
 public sealed partial class MainWindowViewModel : ViewModelBase
 {

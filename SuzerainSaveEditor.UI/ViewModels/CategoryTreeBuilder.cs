@@ -1,7 +1,7 @@
 using SuzerainSaveEditor.Core.Schema;
 using SuzerainSaveEditor.Core.Services;
 
-namespace SuzerainSaveEditor.App.ViewModels;
+namespace SuzerainSaveEditor.UI.ViewModels;
 
 public static class CategoryTreeBuilder
 {

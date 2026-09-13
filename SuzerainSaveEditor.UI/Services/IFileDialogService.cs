@@ -1,4 +1,4 @@
-namespace SuzerainSaveEditor.App.Services;
+namespace SuzerainSaveEditor.UI.Services;
 
 public interface IFileDialogService
 {

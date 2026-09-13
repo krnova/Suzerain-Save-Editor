@@ -1,4 +1,4 @@
-namespace SuzerainSaveEditor.App.ViewModels;
+namespace SuzerainSaveEditor.UI.ViewModels;
 
 // extracts field and category tree filtering logic from MainWindowViewModel
 public sealed class FieldFilterService

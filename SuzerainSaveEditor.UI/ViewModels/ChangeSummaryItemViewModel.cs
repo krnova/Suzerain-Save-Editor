@@ -1,4 +1,4 @@
-namespace SuzerainSaveEditor.App.ViewModels;
+namespace SuzerainSaveEditor.UI.ViewModels;
 
 public sealed record ChangeSummaryItemViewModel(
     string Label,

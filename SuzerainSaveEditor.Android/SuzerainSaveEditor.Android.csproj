@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <!-- No pinned API suffix (e.g. -android34.0) - this tracks net10.0-android's current
+         default (API 36.0 as of this writing) instead of going stale. Pin explicitly only
+         if you have a specific reason to build against an older API surface. -->
+    <TargetFramework>net10.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>29</SupportedOSPlatformVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationId>com.suzerain.saveeditor</ApplicationId>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <AndroidManifest>AndroidManifest.xml</AndroidManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Avalonia/CommunityToolkit.Mvvm/Themes.Fluent/Fonts.Inter flow transitively from the UI project reference -->
+    <PackageReference Include="Avalonia.Android" Version="11.3.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SuzerainSaveEditor.Core\SuzerainSaveEditor.Core.csproj" />
+    <ProjectReference Include="..\SuzerainSaveEditor.UI\SuzerainSaveEditor.UI.csproj" />
+  </ItemGroup>
+</Project>

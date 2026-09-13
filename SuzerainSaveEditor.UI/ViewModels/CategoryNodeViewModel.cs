@@ -1,6 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace SuzerainSaveEditor.App.ViewModels;
+namespace SuzerainSaveEditor.UI.ViewModels;
 
 // represents a node in the advanced field category tree (namespace or sub-category)
 public sealed partial class CategoryNodeViewModel : ViewModelBase

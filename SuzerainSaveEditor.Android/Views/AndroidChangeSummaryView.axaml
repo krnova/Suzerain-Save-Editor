@@ -1,0 +1,42 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SuzerainSaveEditor.UI.ViewModels"
+             x:Class="SuzerainSaveEditor.Android.Views.AndroidChangeSummaryView"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch"
+             Background="#AA000000">
+
+    <Border Background="{DynamicResource BgBase}"
+            CornerRadius="8"
+            Padding="20"
+            MaxWidth="420"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+        <StackPanel Spacing="16">
+            <TextBlock Text="Review Changes"
+                       FontSize="16"
+                       FontWeight="SemiBold" />
+
+            <TextBlock x:Name="SummaryTextBlock" FontSize="13" />
+
+            <ScrollViewer MaxHeight="320">
+                <ItemsControl x:Name="ChangesList">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="vm:ChangeSummaryItemViewModel">
+                            <Grid ColumnDefinitions="*,Auto,*" Margin="0,4">
+                                <TextBlock Grid.Column="0" Text="{Binding Label}" FontWeight="SemiBold" />
+                                <TextBlock Grid.Column="1" Text="→" Margin="6,0" />
+                                <TextBlock Grid.Column="2" Text="{Binding NewValue}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10">
+                <Button Content="Cancel" Padding="16,8" Click="OnCancel" />
+                <Button Content="Save Changes" Padding="16,8" Classes="accent" Click="OnSave" />
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</UserControl>
