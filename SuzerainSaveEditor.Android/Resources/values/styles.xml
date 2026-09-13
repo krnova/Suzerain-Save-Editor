@@ -3,5 +3,6 @@
     <style name="MyTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
+        <item name="android:windowBackground">#FF1A1917</item>
     </style>
 </resources>
